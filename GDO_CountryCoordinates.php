@@ -36,7 +36,7 @@ final class GDO_CountryCoordinates extends GDO
 	/**
 	 * @return GDO_Country
 	 */
-	public function getCountry() { return $this->getValue('cc_country'); }
+	public function getCountry() { return $this->gdoValue('cc_country'); }
 	public function getCountryID() { return $this->gdoVar('cc_country'); }
 	
 	public function getMinLat() { return $this->gdoVar('cc_min_lat'); }
