@@ -75,14 +75,16 @@ final class GDO_CountryCoordinates extends GDO
 	
 	/**
 	 * Load the geometry to find exact country.
-	 * @param GDO_Country $country
-	 * @return object
 	 */
-	public static function loadGeometry(GDO_Country $country)
+	public static function loadGeometry(GDO_Country $country) : object
 	{
 	    $iso3 = strtolower($country->getISO3());
 		$filename = Module_CountryCoordinates::instance()->filePath("data/{$iso3}.geo.json");
-		$content = file_get_contents($filename);
+		$content = @file_get_contents($filename);
+		if (!$content)
+		{
+			return (object)["type" => 'None'];
+		}
 		$object = json_decode($content);
 		$feature = $object->features[0];
 		return isset($feature->geometry) ?

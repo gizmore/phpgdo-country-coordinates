@@ -12,6 +12,7 @@ use GDO\Core\GDO_Module;
 final class Module_CountryCoordinates extends GDO_Module
 {
 	public int $priority = 250;
+	public string $license = 'ODbL';
 	
 	public function defaultEnabled() : bool { return false; }
 	
@@ -26,4 +27,12 @@ final class Module_CountryCoordinates extends GDO_Module
 	    ];
 	}
 	
+	public function getDependencies() : array
+	{
+		return [
+			'Country',
+			'Maps',
+		];
+	}
+
 }
