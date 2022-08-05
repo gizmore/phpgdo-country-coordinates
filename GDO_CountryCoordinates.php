@@ -5,6 +5,8 @@ use GDO\Core\GDO;
 use GDO\Country\GDT_Country;
 use GDO\Core\GDT_Decimal;
 use GDO\Country\GDO_Country;
+use GDO\Maps\GDT_Lat;
+use GDO\Maps\GDT_Lng;
 
 /**
  * Table holds shapes of countries.
@@ -26,10 +28,10 @@ final class GDO_CountryCoordinates extends GDO
 	{
 		return [
 			GDT_Country::make('cc_country')->primary(),
-			GDT_Decimal::make('cc_min_lat')->digits(3, 7),
-			GDT_Decimal::make('cc_min_lng')->digits(3, 7),
-			GDT_Decimal::make('cc_max_lat')->digits(3, 7),
-			GDT_Decimal::make('cc_max_lng')->digits(3, 7),
+			GDT_Lat::make('cc_min_lat'),
+			GDT_Lng::make('cc_min_lng'),
+			GDT_Lat::make('cc_max_lat'),
+			GDT_Lng::make('cc_max_lng'),
 		];
 	}
 	
@@ -79,7 +81,7 @@ final class GDO_CountryCoordinates extends GDO
 	public static function loadGeometry(GDO_Country $country) : object
 	{
 	    $iso3 = strtolower($country->getISO3());
-		$filename = Module_CountryCoordinates::instance()->filePath("data/{$iso3}.geo.json");
+		$filename = Module_CountryCoordinates::instance()->filePath("countries/data/{$iso3}.geo.json");
 		$content = @file_get_contents($filename);
 		if (!$content)
 		{
