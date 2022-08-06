@@ -9,6 +9,7 @@ use GDO\Maps\Position;
 
 /**
  * Detect a country by lat/lng geocoordinates.
+ * 
  * Stolen from https://stackoverflow.com/a/2922778
  * Stolen from http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
  * 
@@ -29,7 +30,7 @@ class Detect extends MethodAjax
 		];
 	}
 	
-	public function getPosition() : ?Position
+	public function getPosition() : Position
 	{
 		return $this->gdoParameterValue('p');
 	}
@@ -46,11 +47,8 @@ class Detect extends MethodAjax
 	
 	public function execute()
 	{
-		if ($position = $this->getPosition())
-		{
-			return $this->detectPosition($position);
-		}
-		return $this->error('err_no_position');
+		$position = $this->getPosition();
+		return $this->detectPosition($position);
 	}
 
 	##############

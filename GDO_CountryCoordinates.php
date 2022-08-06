@@ -3,7 +3,6 @@ namespace GDO\CountryCoordinates;
 
 use GDO\Core\GDO;
 use GDO\Country\GDT_Country;
-use GDO\Core\GDT_Decimal;
 use GDO\Country\GDO_Country;
 use GDO\Maps\GDT_Lat;
 use GDO\Maps\GDT_Lng;
@@ -13,8 +12,8 @@ use GDO\Maps\GDT_Lng;
  * Uses memcached for a full cache of the planet borders.
  * 
  * @author gizmore
- * @version 6.10
- * @since 6.06;
+ * @version 7.0.1
+ * @since 6.6.0;
  */
 final class GDO_CountryCoordinates extends GDO
 {
@@ -35,24 +34,18 @@ final class GDO_CountryCoordinates extends GDO
 		];
 	}
 	
-	/**
-	 * @return GDO_Country
-	 */
-	public function getCountry() { return $this->gdoValue('cc_country'); }
-	public function getCountryID() { return $this->gdoVar('cc_country'); }
+	public function getCountry() : GDO_Country { return $this->gdoValue('cc_country'); }
+	public function getCountryID() : string { return $this->gdoVar('cc_country'); }
 	
-	public function getMinLat() { return $this->gdoVar('cc_min_lat'); }
-	public function getMinLng() { return $this->gdoVar('cc_min_lng'); }
-	public function getMaxLat() { return $this->gdoVar('cc_max_lat'); }
-	public function getMaxLng() { return $this->gdoVar('cc_max_lng'); }
+	public function getMinLat() : ?string { return $this->gdoVar('cc_min_lat'); }
+	public function getMinLng() : ?string { return $this->gdoVar('cc_min_lng'); }
+	public function getMaxLat() : ?string { return $this->gdoVar('cc_max_lat'); }
+	public function getMaxLng() : ?string { return $this->gdoVar('cc_max_lng'); }
 	
 	/**
 	 * Check if bounding rect contains coordinates.
-	 * @param double $lat
-	 * @param double $lng
-	 * @return boolean
 	 */
-	public function boxIncludes($lat, $lng)
+	public function boxIncludes(float $lat, float $lng) : bool
 	{
 		return ($this->getMinLat() <= $lat) &&
 			($this->getMaxLat() >= $lat) &&
@@ -62,10 +55,8 @@ final class GDO_CountryCoordinates extends GDO
 	
 	/**
 	 * Get bounding box for a country.
-	 * @param string $id
-	 * @return self
 	 */
-	public static function getOrCreateById($id)
+	public static function getOrCreateById(string $id) : self
 	{
 		$cache = self::table()->allCached();
 		if (!isset($cache[$id]))
@@ -96,11 +87,8 @@ final class GDO_CountryCoordinates extends GDO
 	
 	/**
 	 * Get countries that rect box the given coordinates for further polygon matching.
-	 * @param float $lat
-	 * @param float $lng
-	 * @return self[]
 	 */
-	public static function probableCountries($lat, $lng)
+	public static function probableCountries(float $lat, float $lng) : array
 	{
 		$back = [];
 		foreach (self::table()->allCached() as $cc)

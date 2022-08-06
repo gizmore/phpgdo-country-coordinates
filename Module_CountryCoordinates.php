@@ -5,9 +5,10 @@ use GDO\Core\GDO_Module;
 
 /**
  * Detect countries via lat/lng coordinates.
+ * 
  * @author gizmore
- * @version 6.10
- * @since 6.06
+ * @version 7.0.1
+ * @since 6.6.0
  */
 final class Module_CountryCoordinates extends GDO_Module
 {
@@ -19,6 +20,8 @@ final class Module_CountryCoordinates extends GDO_Module
 	public function onInstall() : void { InstallGeocountries::install(); }
 
 	public function thirdPartyFolders() : array { return ['/data/']; }
+	
+	public function onLoadLanguage() : void { $this->loadLanguage('lang/cc'); }
 	
 	public function getClasses() : array
 	{
