@@ -6,6 +6,7 @@ use GDO\Country\GDO_Country;
 use GDO\Core\MethodAjax;
 use GDO\Maps\GDT_Position;
 use GDO\Maps\Position;
+use GDO\UI\GDT_Panel;
 
 /**
  * Detect a country by lat/lng geocoordinates.
@@ -48,7 +49,9 @@ class Detect extends MethodAjax
 	public function execute()
 	{
 		$position = $this->getPosition();
-		return $this->detectPosition($position);
+		$country = $this->detectPosition($position);
+		$panel = GDT_Panel::make()->title('t_detected_country')->text('p_detected_country', [$country->render()]);
+		return $panel;
 	}
 
 	##############
