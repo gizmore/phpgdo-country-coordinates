@@ -7,6 +7,7 @@ use GDO\Core\MethodAjax;
 use GDO\Maps\GDT_Position;
 use GDO\Maps\Position;
 use GDO\UI\GDT_Panel;
+use GDO\Core\GDT_Tuple;
 
 /**
  * Detect a country by lat/lng geocoordinates.
@@ -50,8 +51,9 @@ class Detect extends MethodAjax
 	{
 		$position = $this->getPosition();
 		$country = $this->detectPosition($position);
-		$panel = GDT_Panel::make()->title('t_detected_country')->text('p_detected_country', [$country->render()]);
-		return $panel;
+		$panel = GDT_Panel::make('result_text')->title('t_detected_country')->text('p_detected_country', [$country->renderCell()]);
+		$result = GDT_Tuple::makeWith($country, $panel);
+		return $result;
 	}
 
 	##############
@@ -76,6 +78,9 @@ class Detect extends MethodAjax
 		return GDO_Country::unknownCountry();
 	}
 	
+	/**
+	 * gizmore coding is lame
+	 */
 	private function insideGeometry(object $geometry, float $lat, float $lng) : bool
 	{
 		switch ($geometry->type)
@@ -109,6 +114,9 @@ class Detect extends MethodAjax
 		return false;
 	}
 	
+	/**
+	 * Maths is fascinating :)
+	 */
 	private function insidePolygon(array $coords, float $lat, float $lng) : bool
 	{
 	   $result = false;
