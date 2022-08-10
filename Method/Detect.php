@@ -8,6 +8,7 @@ use GDO\Maps\GDT_Position;
 use GDO\Maps\Position;
 use GDO\UI\GDT_Panel;
 use GDO\Core\GDT_Tuple;
+use GDO\Core\Application;
 
 /**
  * Detect a country by lat/lng geocoordinates.
@@ -52,7 +53,13 @@ class Detect extends MethodAjax
 		$position = $this->getPosition();
 		$country = $this->detectPosition($position);
 		$panel = GDT_Panel::make('result_text')->title('t_detected_country')->text('p_detected_country', [$country->renderCell()]);
-		$result = GDT_Tuple::makeWith($country, $panel);
+		$result = GDT_Tuple::make();
+		if (Application::$INSTANCE->isAPI())
+		{
+			$country->name('detected');
+			$result->addField($country);
+		}
+		$result->addField($panel);
 		return $result;
 	}
 
