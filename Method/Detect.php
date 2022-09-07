@@ -9,6 +9,7 @@ use GDO\Maps\Position;
 use GDO\UI\GDT_Panel;
 use GDO\Core\GDT_Tuple;
 use GDO\Core\Application;
+use GDO\Country\GDT_Country;
 
 /**
  * Detect a country by lat/lng geocoordinates.
@@ -56,8 +57,8 @@ class Detect extends MethodAjax
 		$result = GDT_Tuple::make();
 		if (Application::$INSTANCE->isJSON())
 		{
-			$country->name('detected');
-			$result->addField($country);
+			$dc = GDT_Country::make('detected')->value($country);
+			$result->addField($dc);
 		}
 		$result->addField($panel);
 		return $result;
