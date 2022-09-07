@@ -54,7 +54,7 @@ class Detect extends MethodAjax
 		$country = $this->detectPosition($position);
 		$panel = GDT_Panel::make('result_text')->title('t_detected_country')->text('p_detected_country', [$country->renderHTML()]);
 		$result = GDT_Tuple::make();
-		if (Application::$INSTANCE->isAPI())
+		if (Application::$INSTANCE->isJSON())
 		{
 			$country->name('detected');
 			$result->addField($country);
