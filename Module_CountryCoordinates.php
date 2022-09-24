@@ -19,7 +19,7 @@ final class Module_CountryCoordinates extends GDO_Module
 	
 	public function onInstall() : void { InstallGeocountries::install(); }
 
-	public function thirdPartyFolders() : array { return ['/data/']; }
+	public function thirdPartyFolders() : array { return ['/countries/']; }
 	
 	public function onLoadLanguage() : void { $this->loadLanguage('lang/cc'); }
 	
