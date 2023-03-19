@@ -56,7 +56,7 @@ final class GDO_CountryCoordinates extends GDO
 	/**
 	 * Get bounding box for a country.
 	 */
-	public static function getOrCreateById(string $id) : self
+	public static function getOrCreateById(string $id): static
 	{
 		$cache = self::table()->allCached();
 		if (!isset($cache[$id]))
