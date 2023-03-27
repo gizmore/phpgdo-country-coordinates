@@ -2,6 +2,7 @@
 namespace GDO\CountryCoordinates\Method;
 
 use GDO\Core\Application;
+use GDO\Core\GDT;
 use GDO\Core\GDT_Tuple;
 use GDO\Core\MethodAjax;
 use GDO\Country\GDO_Country;
@@ -35,7 +36,7 @@ class Detect extends MethodAjax
 		];
 	}
 
-	public function execute()
+	public function execute(): GDT
 	{
 		$position = $this->getPosition();
 		$country = $this->detectPosition($position);
