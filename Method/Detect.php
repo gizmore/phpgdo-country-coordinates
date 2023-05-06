@@ -8,6 +8,7 @@ use GDO\Core\MethodAjax;
 use GDO\Country\GDO_Country;
 use GDO\Country\GDT_Country;
 use GDO\CountryCoordinates\GDO_CountryCoordinates;
+use GDO\CountryCoordinates\Module_CountryCoordinates;
 use GDO\Maps\GDT_Position;
 use GDO\Maps\Position;
 use GDO\UI\GDT_Panel;

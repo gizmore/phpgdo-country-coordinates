@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace GDO\CountryCoordinates;
 
 use GDO\Core\GDO;
@@ -11,7 +12,7 @@ use GDO\Maps\GDT_Lng;
  * Table holds shapes of countries.
  * Uses memcached for a full cache of the planet borders.
  *
- * @version 7.0.1
+ * @version 7.0.3
  * @since 6.6.0;
  * @author gizmore
  */
